@@ -53,14 +53,17 @@ flask db seed
 
 It is the year 22Bby and the galaxy is on a knife's edge amidst ongoing political turmoil. The prestigious Jedi Order and its 10,000 strong Jedi Knights, the keepers of the peace are all that stands between the fragile Republic and all out war. <br>
 
-Jedi Master Obi-Kenobi while investigating a plot to assasinate Senator Amidala has exposed some major flaws in the Jedi Archives as the planet Kamino had been inexplicably removed from the records by the former Jedi turned Sith Lord, Count Dooku, using the access codes of the now deceased Jedi Sifo Diyas. <br>
+Jedi Master Obi-Kenobi while investigating a plot to assasinate Senator Amidala has exposed some major flaws in the Jedi Archives as the planet Kamino had been inexplicably removed from the records! It was later discovered that the culprit was non other than former Jedi turned Sith Lord, Count Dooku using the access codes of the now deceased Jedi Sifo Diyas. <br>
 
 ![Visble Confusion](docs/visible_confusion.jpg)
 
-To ensure breaches likes this do not occur in the future, the Jedi council has ordered a full reconstruction of the archives database and its security systems, as well as making sure all 10,000 members of the order are assigned the approproate level of access and are properly accounted for at all times...
+
+To protect the archives from future breaches, the Jedi council has ordered a full reconstruction of the archives database and its security systems, as well as making sure all members of the order are assigned the approproate level of access and are properly accounted for at all times...
 </em>
 
 ### **R2 - Why is it a problem that needs solving?**
+![Archives Meme](docs/archives_meme.jpg)
+
 
 
 ### **R3 - Why have you chosen this database system. What are the drawbacks compared to others?**
