@@ -20,24 +20,26 @@
 ### **Installation Instructions**
 
 #### **Open WSL command line and run the following commands:**
-1. Start PostgreSQL server with:
+
+Start PostgreSQL server with:
 ```sh
 sudo service postgresql start
 ```
-2. Create database
+Create database
 ```sh
 create database Jedi-Archives
 ```
 #### **Open second WSL command line and run the following commands:**
-3. Create virtual environment
+
+Create virtual environment
 ```sh
 python3 -m venv .venv
 ```
-4. If virtual environment is not automatically activated run:
+If virtual environment is not automatically activated run:
 ```sh
 source .venv/bin/activate
 ```
-5. Finally, run the following cli commands to set up and run Flask application:
+Finally, run the following cli commands to set up and run Flask application:
 ```sh
 pip install -r requirements.txt
 flask run
@@ -51,7 +53,7 @@ flask db seed
 
 <p align="center"><em>A long time ago, in a galaxy far far away...<br>
 
-It is the year 22Bby and the galaxy is on a knife's edge amidst ongoing political turmoil. The prestigious Jedi Order and its 10,000 strong Jedi Knights, the keepers of the peace are all that stands between the fragile Republic and all out war. <br>
+It is the year 22Bby and the galaxy is on a knife's edge amidst ongoing political turmoil. The prestigious Jedi Order and its 10,000 strong Jedi Knights, the keepers of the peace, are all that stands between the fragile Republic and all out war. <br>
 
 Jedi Master Obi-Wan Kenobi while investigating a plot to assasinate Senator Amidala has exposed some major flaws in the Jedi Archives as the planet Kamino had been inexplicably removed from the records! It was later discovered that the culprit was non other than former Jedi turned Sith Lord, Count Dooku using the access codes of the now deceased Jedi Sifo Diyas. <br>
 
