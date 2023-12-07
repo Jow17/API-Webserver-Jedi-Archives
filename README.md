@@ -51,13 +51,15 @@ Open postman and use localhost:5555 as port 5555 is set as the default port in .
 ---
 ### **R1 - Identification of the problem you are trying to solve by building this particular app.**
 
-<p align="center"><em>A long time ago, in a galaxy far far away...<br>
+<p align="center"><em><b>A long time ago, in a galaxy far far away...</b><br></em>
 
-It is the year 22Bby and the galaxy is on a knife's edge amidst ongoing political turmoil. The prestigious Jedi Order and its 10,000 strong Jedi Knights, the keepers of the peace, are all that stands between the fragile Republic and all out war.<br>
+![Star wars logo](docs/Star_Wars_Logo.svg.png)
 
-Jedi Master Obi-Wan Kenobi, while investigating a plot to assasinate Senator Amidala, has exposed some major flaws in the Jedi Archives as the planet Kamino had been inexplicably removed from the records! It was later discovered that the culprit was non other than former Jedi turned Sith Lord, Count Dooku, using the access codes of the now deceased Jedi Sifo Dyas.<br>
+*It is the year 22Bby and the galaxy is on a knife's edge amidst ongoing political turmoil. The prestigious Jedi Order and its 10,000 strong Jedi Knights, the keepers of the peace, are all that stands between the fragile Republic and all out war.*
 
-To protect the archives from future breaches, the Jedi council has ordered a full reconstruction of the archives database and its security systems. In light of Dooku's betrayal, the council also requests that the new database ensures that all members of the order are assigned the appropriate level of access and are properly accounted for at all times... </em>
+*Jedi Master Obi-Wan Kenobi, while investigating a plot to assasinate Senator Amidala, has exposed some major flaws in the Jedi Archives as the planet Kamino had been inexplicably removed from the records! It was later discovered that the culprit was non other than former Jedi turned Sith Lord, Count Dooku, using the access codes of the now deceased Jedi Sifo Dyas.*
+
+*To protect the archives from future breaches, the Jedi council has ordered a full reconstruction of the archives including an overhaul of it's database record systems. The council also requests that that all members of the order are assigned the appropriate level of access and are properly accounted for at all times...*
 
 ---
 
@@ -65,7 +67,7 @@ To protect the archives from future breaches, the Jedi council has ordered a ful
 
 ![Yoda meme](docs/Yoda_meme.jpg)
 
-
+The Jedi archives is the largest repository of information in the known galaxy containing history and secrets spaning tens of thousands of years.
 
 
 
