@@ -71,13 +71,13 @@ The Jedi archives is the largest repository of records in the known galaxy conta
 
 - **Lack of mobile accessibility:** Whilst the archives are stored in a secure location in the heart of the Jedi temple, this however means that any Jedi needing to access records would have to physically be in the archives. Due to how vast the galaxy has become, this would not only make reading the records difficult and time-consuming as Jedi would have to make long travel times back to Corusant, but updating the current information is also quite inefficient. As the political turmoil throughout the Republic systems has dramatically increased since the invasion of Naboo, Jedi are becoming more and more busy and their effectiveness in the field would be significantly improved if they has ample access to the wealth of knowledge of the archives from anywhere in the galaxy. 
 
-- **Little to no authentication/authorisation:** Dooku's sudden and unexpected betrayal of the order has raised significant concerns surrounding the archives security systems. As it currently stands, Jedi only need to provide an access code to read and manipulate records and this was exposed by Dooku as he used a dead Jedi's codes to delete an entire planet. Dooku's actions show that the order's blind faith in their members is foolish. Proper authorization and authentication should be implemented for all members of the order to ensure that breaches like this do no occur in the future. 
+- **Little to no authentication/authorisation:** Dooku's sudden and unexpected betrayal of the order has raised significant concerns surrounding the archives security systems. As it currently stands, Jedi only need to provide an access code to read and manipulate records. This massive flaw was exploited by Dooku as he used a dead Jedi's codes to delete an entire planet. Dooku's actions show that the order has put too much blind faith in their members loyalties. Whilst chief librarian Jocusta Nu has done an excellent service in maintaining the archives, security measures will need to be more robust. Proper authorization and authentication should be implemented for all members of the order to ensure that breaches like this do no occur in the future. 
 
 ---
 
 ### **R3 - Why have you chosen this database system. What are the drawbacks compared to others?**
 
-PostgreSQL would successfully address the issues listed in the previous section. It is an open source relational database system that can be manipulated using the SQL and JSON querying languages. 
+Using a PostgreSQL database system would successfully address the issues listed in the previous section. It is an open source and relationship databas type that can be manipulated using the SQL and JSON querying languages. 
 
 ### **R4 - Identify and discuss the key functionalities and benefits of an ORM**
 
