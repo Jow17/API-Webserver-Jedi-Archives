@@ -67,7 +67,11 @@ Open postman and use localhost:5555 as port 5555 is set as the default port in .
 
 ![Yoda meme](docs/Yoda_meme.jpg)
 
-The Jedi archives is the largest repository of information in the known galaxy containing history and secrets spaning tens of thousands of years.
+The Jedi archives is the largest repository of records in the known galaxy containing history and information spanning tens of thousands of years. Unfortunately, this also means that its systems are equally as old as the content is stores with numerous flaws that will need to be addressed. Thus the archives are in dire need of an overhaul for a more civilized age.
+
+- **Lack of mobile accessibility:** Whilst the archives are stored in a secure location in the heart of the Jedi temple, this however means that any Jedi needing to access records would have to physically be in the archives. Due to how vast the galaxy has become, this would not only make reading the records difficult and time-consuming as Jedi would have to make long travel times back to Corusant, but updating the current information is also quite inefficient. As the political turmoil throughout the Republic systems has dramatically increased since the invasion of Naboo, Jedi are becoming more and more busy and their effectiveness in the field would be significantly improved if they has ample access to the wealth of knowledge of the archives from anywhere in the galaxy. 
+
+- **Little to no authentication/authorisation** Dooku's sudden and unexpected betrayal of the order has raised significant concerns surrounding the archives security systems.  As it currently stands individuals only need to provide an access code to read and manipulate records and this was exposed by Dooku as he used a dead Jedi's codes to delete an entire planet. Proper authentication and authorisation would have prevented this from happening and the Jedi's blind faith in their members 
 
 
 
