@@ -90,7 +90,7 @@ However, PostgreSQL is not without its flaws when compared to other database typ
 
 ### **R6 - An ERD for your app**
 
-![Archives ERD](docs/Jedi_Archives_ERD.drawio.png)
+![Archives ERD](docs/Jedi_Archives_ERD.JPG)
 
 ### **R7 - Detail any third party services that your app will use**
 
