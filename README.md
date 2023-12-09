@@ -86,6 +86,12 @@ However, PostgreSQL is not without its flaws when compared to other database typ
 
 ### **R4 - Identify and discuss the key functionalities and benefits of an ORM**
 
+Whilst querying a database using SQL is an essential part of manipulating data, the process is often complicated and time-consuming. By utilizing a technique called Object Relational Mapping, developers can utlise object oriented programming to connect an oject in an object oriented programming language such as python to an SQL database without needing to query it. ORM's essentially convert the code in the compiled language and translates it and generates SQL code for a relational database such as PostgreSQL to perform the standard CRUD operations such as reading and creating. 
+
+ORM's are extremely useful as they enable developers to use the progamming language of their choice to build implement the necessary parameters for interacting with a database. This essentially removes one of the major drawbacks of a database system like PostgresSQL having a steep learning curve and complex querying methods. Furthermore, developers can easilt switch between different database types without having to modify their current code as ORM's will automatically translate accordingly depending on the database being used. 
+
+Visually, ORMs are easier to read and code as it uses classes that define attributes and business related models. These are called models which are mapped to relational database tables and enables developers to work directly with objects. ORM's also provide an extra layers of security for databases as they decrease the likelihood of SQL injections
+
 ### **R5 - Document all endpoints for your API**
 
 ### **R6 - An ERD for your app**
