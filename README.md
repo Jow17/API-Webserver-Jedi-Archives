@@ -82,7 +82,7 @@ Using a PostgreSQL database system would successfully address the issues listed 
 
 One of the main reasons for using PostgreSQL specifically is its support for both vertical and horizontal scalling, which means extra data can be added to tables with relative ease. Because the archives contain an almost infinite amount of data, records will take some time to transfer over, however PostgreSQL's scalability will make the process much more efficient.
 
-However, PostgreSQL is not without its flaws when compared to other database types. 
+However, PostgreSQL is not without its flaws when compared to other database types. For starters, Because PostgreSQL is a relational database, it reads records in a table sequentially, meaning that the larger a table becomes, the slower it is to query data. Non relational databases such as MongoDB are more effecient when dealing with high read and write workloads. Data in MongoDB is also de-normalised meaning joins between tables are quicker and less costly. Whilst these are significant advantages over PostgreSQL, PostgreSQL is still the more useful database system as it can deal with large amounts of data far better and can handle complex queries thanks to the SQL language and its sophisticated query optimizations. As the archives grows in scale and complexity, it is important that data can be modified accordingly. 
 
 ### **R4 - Identify and discuss the key functionalities and benefits of an ORM**
 
