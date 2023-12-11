@@ -90,7 +90,7 @@ Whilst querying a database using SQL is an essential part of manipulating data, 
 
 ORM's are extremely useful as they enable developers to use the progamming language of their choice to build implement the necessary parameters for interacting with a database. This essentially removes one of the major drawbacks of a database system like PostgresSQL having a steep learning curve and complex querying methods. Furthermore, developers can easilt switch between different database types without having to modify their current code as ORM's will automatically translate accordingly depending on the database being used. 
 
-Visually, ORMs are easier to read and code as it uses classes that define attributes and business related models. These are called models which are mapped to relational database tables and enables developers to work directly with objects. ORM's also provide an extra layers of security for databases as they decrease the likelihood of SQL injections
+Visually, ORMs are easier to read and code as it uses classes that define attributes and business related models. These are called models which are mapped to relational database tables and enables developers to work directly with objects.
 
 ### **R5 - Document all endpoints for your API**
 
