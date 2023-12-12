@@ -18,14 +18,10 @@ def db_seed():
         Jedi(
             first_name="Obi-wan"
             last_name="Kenobi"
-            access_code=bcrypt.generate_password_hash("highground24".decode("utf8")))
+            access_code=bcrypt.generate_password_hash("highground24".decode("utf8"))
             rank = "Master"
             apprentice = "Anakin Skywalker"
-            status = "Alive"
             location = "Kamino"
-
-
-
-
+            status = "Alive"
         )
     ]
