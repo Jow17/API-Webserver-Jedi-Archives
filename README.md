@@ -27,7 +27,7 @@ sudo service postgresql start
 ```
 Create database:
 ```sh
-create database Jedi-Archives
+create database jedi-archives
 ```
 #### **Open second WSL command line and run the following commands:**
 
