@@ -6,7 +6,7 @@ from blueprints.species_bp import species_bp
 
 app.register_blueprint(db_commands)
 app.register_blueprint(jedi_bp)
-app.register_blueprint(planets_bp)
-app.register_blueprint(species_bp)
+# app.register_blueprint(planets_bp)
+# app.register_blueprint(species_bp)
 
 print(app.url_map)

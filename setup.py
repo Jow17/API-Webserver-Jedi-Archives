@@ -4,7 +4,7 @@ from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from os import environ
-from marshmallow.exceptions import ValidationError
+# from marshmallow.exceptions import ValidationError
 
 app = Flask(__name__)
 
