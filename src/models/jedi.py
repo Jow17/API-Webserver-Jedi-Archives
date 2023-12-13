@@ -24,7 +24,7 @@ class Jedi(db.Model):
 class JediSchema(ma.Schema):
     status = fields.String(validate=OneOf(VALID_STATUSES))
     rank = fields.Integer(validate=OneOf(VALID_RANKS))
-    access_code = fields.String(required=True, validate=Length(min=8, error = 'Password must be as least 8 characers long'))
+    access_code = fields.String(required=True, validate=Length(min=8, error = 'Access code must be as least 8 characers long'))
  
     class Meta:
         fields = ("first_name", "last_name","rank", "master", "apprentice","location", "status")

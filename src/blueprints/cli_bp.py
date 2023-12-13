@@ -1,6 +1,7 @@
 from flask import Blueprint
 from setup import db, bcrypt
 from models.jedi import Jedi
+from models.planet import Planet
 
 
 db_commands = Blueprint('db', __name__)
@@ -26,7 +27,31 @@ def db_seed():
         ),
     ]
 
-db.session.add_all(jedi)
-db.session.commit()
+    db.session.add_all(jedi)
+    db.session.commit()
+
+    # Planets
+    planets = [
+        Planet(
+            planet_name="Kamino",
+            sector="Abrion",
+            population="1 billion",
+            allegiance="Independent",
+            jedi_assigned = "Obi-Wan Kenobi",
+        ),    
+        Planet(
+            planet_name="Coruscant",
+            sector="Corusant", 
+            population="trillions",
+            allegiance = "Republic",
+
+        )
+    ]
+    db.session.add_all(planets)
+    db.session.commit()
+
+
+
+
 
 print("Database seeded")
