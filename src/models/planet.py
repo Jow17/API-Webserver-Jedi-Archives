@@ -11,7 +11,7 @@ class Planet(db.Model):
 
     planet_name = db.Column(db.String, nullable=False)
     sector = db.Column(db.String, nullable=False)
-    population = db.Column(db.Integer, nullable=False)
+    population = db.Column(db.String, nullable=False)
     allegiance = db.Column(db.String, nullable=False)
     description = db.Column(db.Text, nullable=False)
     jedi_assigned = db.Column(db.String)

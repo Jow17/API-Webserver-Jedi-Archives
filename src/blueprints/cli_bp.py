@@ -2,7 +2,7 @@ from flask import Blueprint
 from setup import db, bcrypt
 from models.jedi import Jedi
 from models.planet import Planet
-from models.sepcies import Species
+from models.species import Species
 
 
 db_commands = Blueprint('db', __name__)
@@ -18,14 +18,23 @@ def db_seed():
     #Jedi 
     jedi = [
         Jedi(
-            first_name="Obi-wan",
-            last_name="Kenobi",
+            username="Uncle_Ben57",
+            name="Obi-wan Kenobi",
             access_code=bcrypt.generate_password_hash("highground24").decode("utf8"),
             rank = "Master",
             apprentice = "Anakin Skywalker",
-            location = "Kamino",
-            status = "Alive"
+            current_location = "Kamino",
+            status = "Alive",
         ),
+        Jedi(
+            username="Grandmaster01",
+            name="Yoda",
+            access_code=bcrypt.generate_password_hash("sizemattersnot").decode("utf8"),
+            rank = "Councilmember",
+            current_location = "Coruscant",
+            status = "Alive",
+
+        )
     ]
 
     db.session.add_all(jedi)
@@ -38,14 +47,16 @@ def db_seed():
             sector="Abrion",
             population="1 billion",
             allegiance="Independent",
+            description="Almost entirely covered by sea, the Kaminoans have build a state of the art cloning facility",
             jedi_assigned = "Obi-Wan Kenobi",
         ),    
         Planet(
             planet_name="Coruscant",
             sector="Corusant", 
             population="trillions",
-            allegiance = "Republic",
-        ),
+            allegiance ="Republic",
+            description="The center of the galaxy",
+        )
     ]
     db.session.add_all(planets)
     db.session.commit()
@@ -55,7 +66,7 @@ def db_seed():
         Species(
             species_name = "human",
             designation = "sentient",
-            home_planet_name = "Coruscant",
+            home_planet = "Coruscant",
             lifespan = "80 years",
         )
     ]
