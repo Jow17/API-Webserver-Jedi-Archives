@@ -105,3 +105,7 @@ Visually, ORMs are easier to read and code as it uses classes that define attrib
 ### **R9 - Discuss the database relations to be implemented in your application**
 
 ### **R10 - Describe the way tasks are allocated and tracked in your project**
+
+```
+1. Completed and finished testing routes for one of my models
+```

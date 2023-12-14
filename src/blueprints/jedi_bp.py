@@ -6,7 +6,6 @@ from flask_jwt_extended import create_access_token, jwt_required
 from datetime import timedelta
 from auth import authorize
 
-
 jedi_bp = Blueprint('jedi', __name__, url_prefix='/jedi')
 
 @jedi_bp.route("/register", methods=["POST"])
@@ -58,6 +57,21 @@ def login():
         }
     else:
         return {"error": "Invalid username or access codes!"}, 401
+    
+@jedi_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
+@jwt_required()
+def update_jedi(id):
+    jedi_info = JediSchema(exclude=['id']).load(request.json)
+    stmt = db.select(Jedi).filter_by(id=id) # .where(Jedi.id == id)
+    jedi = db.session.scalar(stmt)
+    if jedi:
+        authorize(jedi.jedi_id)
+        jedi.current_location = jedi_info.get('current_location', jedi.description)
+        jedi.status = jedi_info.get('status', jedi.status)
+        db.session.commit()
+        return JediSchema().dump(jedi)
+    else:
+        return {'error': 'Jedi not found'}, 404
 
 # @jedi_bp.route("/")
 # @jwt_required()
