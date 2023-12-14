@@ -10,9 +10,10 @@ class Jedi(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    username = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False, unique=True)
     name = db.Column(db.String, nullable=False)
     access_code = db.Column(db.String, nullable=False)
+    species = db.Column(db.String, nullable=False)
     rank = db.Column(db.String, nullable=False)
     master = db.Column(db.String)
     apprentice = db.Column(db.String)
@@ -24,11 +25,12 @@ class Jedi(db.Model):
 class JediSchema(ma.Schema):
     status = fields.String(validate=OneOf(VALID_STATUSES))
     rank = fields.String(validate=OneOf(VALID_RANKS))
+    username = fields.String(required=True)
     access_code = fields.String(required=True, validate=Length(min=8, error = 'Access code must be as least 8 characers long'))
     
  
     class Meta:
-        fields = ("id", "username", "name", "access_code", "rank", "master", "apprentice","current_location", "status")
+        fields = ("id", "username", "name", "access_code", "species", "rank", "master", "apprentice","current_location", "status")
     
 
     

@@ -4,7 +4,7 @@ from setup import bcrypt, db
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, jwt_required
 from datetime import timedelta
-# from auth import authorize
+from auth import authorize
 
 
 jedi_bp = Blueprint('jedi', __name__, url_prefix='/jedi')
@@ -12,7 +12,7 @@ jedi_bp = Blueprint('jedi', __name__, url_prefix='/jedi')
 @jedi_bp.route("/register", methods=["POST"])
 @jwt_required()
 def register():
-    # authorize() # Admin only
+    authorize() # Councilmember only
     try:
         # Parse incoming POST body through the schema
         jedi_info = JediSchema(exclude=["id"]).load(request.json)
@@ -24,6 +24,7 @@ def register():
             ),
             name=jedi_info.get("name", ""),
             rank=jedi_info.get("rank", ""),
+            species=jedi_info.get("species", ""),
             master=jedi_info.get("master", ""),
             apprentice=jedi_info.get("apprentice", ""),
             current_location=jedi_info.get("current_location", ""),
