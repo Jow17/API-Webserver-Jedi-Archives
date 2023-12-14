@@ -11,10 +11,10 @@ class Planet(db.Model):
 
     planet_name = db.Column(db.String, nullable=False)
     sector = db.Column(db.String, nullable=False)
-    population = db.Column(db.integer, nullable=False)
-    allegiance = db.Column(db.string, nullable=False)
-    description = db.Column(db.text, nullable=False)
-    jedi_assigned = db.Column(db.string)
+    population = db.Column(db.Integer, nullable=False)
+    allegiance = db.Column(db.String, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    jedi_assigned = db.Column(db.String)
 
 class Planet_Schema(ma.Schema):
     allegiance = fields.String(validate=OneOf(VALID_ALLEGIANCES))

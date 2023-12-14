@@ -4,7 +4,7 @@ from setup import bcrypt, db
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, jwt_required
 from datetime import timedelta
-from auth import authorize
+# from auth import authorize
 
 
 jedi_bp = Blueprint('jedi', __name__, url_prefix='/jedi')
