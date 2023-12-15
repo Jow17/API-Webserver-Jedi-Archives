@@ -8,6 +8,8 @@ from auth import authorize
 
 jedi_bp = Blueprint('jedi', __name__, url_prefix='/jedi')
 
+
+# Register a Jedi
 @jedi_bp.route("/register", methods=["POST"])
 @jwt_required()
 def register():
@@ -39,6 +41,7 @@ def register():
     except IntegrityError:
         return {"error": "username already in use!"}, 409
 
+# Login a Jedi
 @jedi_bp.route("/login", methods=["POST"])
 def login():
     # 1. Parse incoming POST body through the schema
@@ -58,11 +61,12 @@ def login():
     else:
         return {"error": "Invalid username or access codes!"}, 401
     
-@jedi_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
+#Update Jedi status and current location
+@jedi_bp.route('/<string:first_name>', methods=['PUT', 'PATCH'])
 @jwt_required()
-def update_jedi(id):
+def update_jedi(first_name):
     jedi_info = JediSchema(exclude=['id']).load(request.json)
-    stmt = db.select(Jedi).filter_by(id=id) # .where(Jedi.id == id)
+    stmt = db.select(Jedi).filter_by(first_name=first_name) # .where(Jedi.id == id)
     jedi = db.session.scalar(stmt)
     if jedi:
         authorize(jedi.jedi_id)
@@ -73,11 +77,14 @@ def update_jedi(id):
     else:
         return {'error': 'Jedi not found'}, 404
 
-# @jedi_bp.route("/")
-# @jwt_required()
-# def all_jedi():
-#     authorize() # Admin only
-#     stmt = db.select(Jedi)
-#     users = db.session.scalars(stmt).all()
-#     print(users[0].cards)
-#     return JediSchema(many=True, exclude=["password"]).dump(jedi)
+# @jedi_bp.route('/')
+
+# Get all cards
+@jedi_bp.route("/", methods=['GET'])
+@jwt_required()
+def all_jedi():
+    authorize()
+    # select * from Jedi;
+    stmt = db.select(Jedi)
+    jedi = db.session.scalars(stmt).all()
+    return JediSchema(many=True, exclude=['access_code']).dump(jedi)

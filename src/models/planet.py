@@ -16,7 +16,7 @@ class Planet(db.Model):
     description = db.Column(db.Text, nullable=False)
     jedi_assigned = db.Column(db.String)
 
-class Planet_Schema(ma.Schema):
+class PlanetSchema(ma.Schema):
     allegiance = fields.String(validate=OneOf(VALID_ALLEGIANCES))
 
     class Meta:

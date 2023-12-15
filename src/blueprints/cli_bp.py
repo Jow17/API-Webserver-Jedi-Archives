@@ -35,7 +35,6 @@ def db_seed():
             rank = "Councilmember",
             current_location = "Coruscant",
             status = "Alive",
-
         )
     ]
 
