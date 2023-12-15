@@ -16,6 +16,10 @@ class Planet(db.Model):
     description = db.Column(db.Text, nullable=False)
     jedi_assigned = db.Column(db.String)
 
+    jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
+    jedi = db.relationship('Jedi', back_populates='planets')
+
+
 class PlanetSchema(ma.Schema):
     allegiance = fields.String(validate=OneOf(VALID_ALLEGIANCES))
 

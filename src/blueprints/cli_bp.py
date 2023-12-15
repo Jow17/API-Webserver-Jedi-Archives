@@ -50,6 +50,7 @@ def db_seed():
             allegiance="Independent",
             description="Almost entirely covered by sea, the Kaminoans have build a state of the art cloning facility",
             jedi_assigned = "Obi-Wan Kenobi",
+            jedi_id = jedi[0].id
         ),    
         Planet(
             planet_name="Coruscant",
@@ -57,8 +58,9 @@ def db_seed():
             population="trillions",
             allegiance ="Republic",
             description="The center of the galaxy",
-            jedi_assigned ="Yoda, Mace, Windu"
-        )
+            jedi_assigned ="Yoda, Mace, Windu",
+            jedi_id = jedi[1].id
+        ),
     ]
     db.session.add_all(planets)
     db.session.commit()
