@@ -18,16 +18,6 @@ def db_seed():
     #Jedi 
     jedi = [
         Jedi(
-            username="Uncle_Ben57",
-            name="Obi-wan Kenobi",
-            access_code=bcrypt.generate_password_hash("highground24").decode("utf8"),
-            species="Human",
-            rank = "Master",
-            apprentice = "Anakin Skywalker",
-            current_location = "Kamino",
-            status = "Alive",
-        ),
-        Jedi(
             username="Grandmaster01",
             name="Yoda",
             access_code=bcrypt.generate_password_hash("sizemattersnot").decode("utf8"),
@@ -35,7 +25,29 @@ def db_seed():
             rank = "Councilmember",
             current_location = "Coruscant",
             status = "Alive",
-        )
+        ),
+
+        Jedi(
+            username="Uncle_Ben",
+            name="Obi-wan_Kenobi",
+            access_code=bcrypt.generate_password_hash("highground24").decode("utf8"),
+            species="Human",
+            rank = "Master",
+            apprentice = "Anakin_Skywalker",
+            current_location = "Kamino",
+            status = "Alive",
+        ),
+
+        Jedi(
+            username="Chosen_1",
+            name="Anakin_Skywalker",
+            access_code=bcrypt.generate_password_hash("Idontlikesand").decode("utf8"),
+            species="Human",
+            rank = "Knight",
+            master = "Obi-wan_Kenobi",
+            current_location = "Tatooine",
+            status = "Alive",
+        ),
     ]
 
     db.session.add_all(jedi)
@@ -55,10 +67,10 @@ def db_seed():
         Planet(
             planet_name="Coruscant",
             sector="Corusant", 
-            population="trillions",
+            population="Trillions",
             allegiance ="Republic",
             description="The center of the galaxy",
-            jedi_assigned ="Yoda, Mace, Windu",
+            jedi_assigned ="Yoda, Mace Windu",
             jedi_id = jedi[1].id
         ),
     ]

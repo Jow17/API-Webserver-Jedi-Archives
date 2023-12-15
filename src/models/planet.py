@@ -11,20 +11,24 @@ class Planet(db.Model):
 
     planet_name = db.Column(db.String, nullable=False)
     sector = db.Column(db.String, nullable=False)
-    population = db.Column(db.String, nullable=False)
+    population = db.Column(db.String)
     allegiance = db.Column(db.String, nullable=False)
-    description = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text)
     jedi_assigned = db.Column(db.String)
 
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
-    jedi = db.relationship('Jedi', back_populates='planets')
+    # jedi = db.relationship('Jedi', back_populates='planets')
 
 
 class PlanetSchema(ma.Schema):
+    planet_name = fields.String(required=True)
+    sector = fields.String(required=True)
+
+    jedi = fields.Nested('JediSchema', only=['name'])
     allegiance = fields.String(validate=OneOf(VALID_ALLEGIANCES))
 
     class Meta:
-        fields = ('planet_name', 'system', 'population', 'allegiance', 'jedi_assigned') 
+        fields = ('planet_name', 'sector', 'population', 'allegiance', 'jedi_id', 'jedi_assigned') 
     
 
 

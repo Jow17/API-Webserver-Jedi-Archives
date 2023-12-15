@@ -13,13 +13,15 @@ class Species(db.Model):
     species_name = db.Column(db.String, nullable=False)
     designation = db.Column(db.String, nullable=False)
     home_planet = db.Column(db.String)
-    lifespan = db.Column(db.String, nullable=False)
+    lifespan = db.Column(db.String)
 
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
-    jedi = db.relationship('Jedi', back_populates='species')
+    # jedi = db.relationship('Jedi', back_populates='species')
+
 class SpeciesSchema(ma.Schema):
+    jedi = fields.Nested('JediSchema', only=['id'])
     designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
 
     class Meta:
-        field = ('species_name', 'home_planet', 'lifespan')
+        field = ('species_name', 'home_planet', 'lifespan', 'jedi', 'jedi_id')
 

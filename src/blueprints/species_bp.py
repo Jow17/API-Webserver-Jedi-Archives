@@ -2,7 +2,7 @@ from flask import Blueprint, request, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from setup import db
 from models.species import SpeciesSchema, Species
-from auth import authorize 
+from auth import councilmember, master
 
 species_bp = Blueprint('species',__name__, url_prefix='/species')
 
@@ -51,8 +51,9 @@ def update_species(species_name):
     species = db.session.scalar(stmt)
     if species:
         authorize(species.jedi_id)
-        species.allegiance = species_info.get('allegiance', species.allegiance)
-        species.jedi_assigned = species_info.get('description', species.jedi_assigned)
+        species.designation = species_info.get('designation', species.allegiance)
+        species.home_planet = species_info.get('home_planet', species.home_planet)
+        species.lifespan = species_info.get('lifespan', species.lifespan)
         db.session.commit()
         return SpeciesSchema().dump(species)
     else:
