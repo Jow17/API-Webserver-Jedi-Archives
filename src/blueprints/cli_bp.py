@@ -57,6 +57,7 @@ def db_seed():
             population="trillions",
             allegiance ="Republic",
             description="The center of the galaxy",
+            jedi_assigned ="Yoda, Mace, Windu"
         )
     ]
     db.session.add_all(planets)
