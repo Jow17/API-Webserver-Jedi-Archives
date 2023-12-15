@@ -9,7 +9,7 @@ def councilmember(jedi_id=None):
     jedi = db.session.scalar(stmt)
     # If it's not the case that the jedi is a councilmember or jedi_id is truthy and matches the token
     # i.e. if jedi_id isn't passed in, they must be a councilmember
-    if not (jedi.rank == "Councilmember" or "Master"):
+    if not (jedi.rank == "Councilmember" or (jedi_id and jwt_jedi_id == jedi_id)):
         abort(401)
 
 def master(jedi_id=None):
@@ -18,5 +18,5 @@ def master(jedi_id=None):
     jedi = db.session.scalar(stmt)
     # If it's not the case that the jedi is a councilmember or jedi_id is truthy and matches the token
     # i.e. if jedi_id isn't passed in, they must be a councilmember
-    if not (jedi.rank == "Master" and (jedi_id and jwt_jedi_id == jedi_id)):
+    if not (jedi.rank == "Master" or "Councilmember" or (jedi_id and jwt_jedi_id == jedi_id)):
         abort(401)

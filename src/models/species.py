@@ -1,4 +1,4 @@
-from setup import db,ma 
+from setup import db, ma 
 from marshmallow import fields 
 from marshmallow.validate import OneOf
 
@@ -10,18 +10,17 @@ class Species(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    species_name = db.Column(db.String, nullable=False)
+    species_name = db.Column(db.String, nullable=False, unique=True)
     designation = db.Column(db.String, nullable=False)
     home_planet = db.Column(db.String)
     lifespan = db.Column(db.String)
 
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
-    # jedi = db.relationship('Jedi', back_populates='species')
 
 class SpeciesSchema(ma.Schema):
-    jedi = fields.Nested('JediSchema', only=['id'])
+    jedi = fields.Nested('JediSchema', only=['name'])
     designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
 
     class Meta:
-        field = ('species_name', 'home_planet', 'lifespan', 'jedi', 'jedi_id')
+        fields = ('id', 'species_name', 'designation', 'home_planet', 'lifespan', 'jedi', 'jedi_id')
 

@@ -80,7 +80,7 @@ def db_seed():
     # Species
     species = [
         Species(
-            species_name = "human",
+            species_name = "Human",
             designation = "sentient",
             home_planet = "Coruscant",
             lifespan = "80 years",
