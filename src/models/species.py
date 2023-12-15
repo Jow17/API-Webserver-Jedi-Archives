@@ -15,6 +15,8 @@ class Species(db.Model):
     home_planet = db.Column(db.String)
     lifespan = db.Column(db.String, nullable=False)
 
+    jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
+    jedi = db.relationship('Jedi', back_populates='species')
 class SpeciesSchema(ma.Schema):
     designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
 

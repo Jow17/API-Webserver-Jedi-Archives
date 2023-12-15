@@ -20,7 +20,10 @@ class Jedi(db.Model):
     current_location = db.Column(db.String, nullable=False)
     status = db.Column(db.String, nullable=False)
 
-    # species_name = db.Column(db.String, db.ForeignKey('species.name'), nullable=False)
+    planets = db.relationship('Planet', back_populates='jedi')
+    species = db.relationship('Species', back_populates='jedi')
+
+    
 
 class JediSchema(ma.Schema):
     status = fields.String(validate=OneOf(VALID_STATUSES))

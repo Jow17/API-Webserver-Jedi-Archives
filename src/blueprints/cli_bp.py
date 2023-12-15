@@ -72,6 +72,7 @@ def db_seed():
             designation = "sentient",
             home_planet = "Coruscant",
             lifespan = "80 years",
+            jedi_id = jedi[1].id
         )
     ]
 
