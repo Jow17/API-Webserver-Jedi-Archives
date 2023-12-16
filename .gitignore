@@ -1,6 +1,6 @@
-/__pycache__
 .venv
+__pycache__
+.env
 .vscode
-src/.pytest_cache
 .DS_Store
-.flaskenv
+.pytest_cache
