@@ -147,11 +147,11 @@ Visually, ORMs are easier to read and code as it uses classes that define attrib
 
 - **HTTP Request Verb:** GET
 
-- **Required data:** Name of Jedi in the url 
+- **Required data:** None
 
 - **Expected response data:**  Expected '200 OK' response with return of all data of Jedi exclusing access code
 
-- **Authentication methods:** Matching councilmember or master JWT token
+- **Authentication methods:** Matching Jedi councilmember or master JWT token
 
 - **Description:** Allows a Jedi councilmember or master to view a single Jedi in the database
 
@@ -163,7 +163,7 @@ Visually, ORMs are easier to read and code as it uses classes that define attrib
 
 - **HTTP Request Verb:** PUT, PATCH
 
-- **Required data:** Name of Jedi in the url and new rank in the body
+- **Required data:** jedi_rank
 
 - **Expected response data:**  Expected '200 OK' response with return of Jedi's name and new rank
 
@@ -179,7 +179,7 @@ Visually, ORMs are easier to read and code as it uses classes that define attrib
 
 - **HTTP Request Verb:** PUT, PATCH
 
-- **Required data:** Name of Jedi in the url, current_location and status
+- **Required data:** current_location, status
 
 - **Expected response data:**  Expected '200 OK' response with return of Jedi's name, new location and status
 
@@ -188,6 +188,167 @@ Visually, ORMs are easier to read and code as it uses classes that define attrib
 - **Description:** Allows a Jedi councilmember to update the location and status of a Jedi
 
 ![jedi update](/docs/endpoints/updatejedi.JPG)
+
+---
+
+### **7. /planets/**
+
+- **HTTP Request Verb:** GET
+
+- **Required data:** None
+
+- **Expected response data:**  Expected '200 OK' response with return of data of all planets in the database
+
+- **Authentication methods:** Matching Jedi JWT token
+
+- **Description:** Allows any Jedi to view all planets in the database
+
+![Get all planets](/docs/endpoints/planets.JPG)
+
+---
+
+### **8. /planets/<planet_name>**
+
+- **HTTP Request Verb:** GET
+
+- **Required data:** None
+
+- **Expected response data:**  Expected '200 OK' response with return of data of a single planet in the database
+
+- **Authentication methods:** Matching Jedi JWT token
+
+- **Description:** Allows any Jedi to view one planet in the database
+
+![Get one planet](/docs/endpoints/getoneplanet.JPG)
+
+---
+
+### **9. /planets/**
+
+- **HTTP Request Verb:** POST
+
+- **Required data:** planet_name, sector, population, allegiance, description, jedi_assigned
+
+- **Expected response data:**  Expected '201 OK' response with return of created planet data 
+
+- **Authentication methods:** Matching Jedi master or councilmember JWT token
+
+- **Description:** Allows a Jedi master or councilmember to register a new planet in the database
+
+![Register planet](/docs/endpoints/registerplanet.JPG)
+
+---
+
+### **10. /planets/<name>**
+
+- **HTTP Request Verb:** PUT, PATCH
+
+- **Required data:** allegiance, jedi_assigned
+
+- **Expected response data:**  Expected '200 OK' response with return of updated planet data 
+
+- **Authentication methods:** Matching Jedi master or councilmember JWT token
+
+- **Description:** Allows a Jedi master or councilmember to update a planet in the database
+
+![Update planet](/docs/endpoints/updateplanet.JPG)
+
+---
+
+### **11. /planets/<name>**
+
+- **HTTP Request Verb:** DELETE
+
+- **Required data:** None
+
+- **Expected response data:**  Expected '200 OK' response with empty tuple
+
+- **Authentication methods:** Matching Jedi councilmember JWT token
+
+- **Description:** Allows a Jedi councilmember to delete a planet from the database
+
+![Delete planet](/docs/endpoints/deleteplanet.JPG)
+
+---
+
+### **12. /species/**
+
+- **HTTP Request Verb:** GET
+
+- **Required data:** None
+
+- **Expected response data:**  Expected '200 OK' response with return of data from all species in the database
+
+- **Authentication methods:** Matching Jedi JWT token
+
+- **Description:** Allows any Jedi to view all species in the database
+
+![Get all species](/docs/endpoints/getallspecies.JPG)
+
+---
+
+### **13. /species/<species_name>**
+
+- **HTTP Request Verb:** GET
+
+- **Required data:** 
+
+- **Expected response data:**  Expected '200 OK' response with return of data from one species in the database
+
+- **Authentication methods:** Matching Jedi JWT token
+
+- **Description:** Allows any Jedi to view one species in the database
+
+![Get one species](/docs/endpoints/getonespecies.JPG)
+
+---
+
+### **14. /species/**
+
+- **HTTP Request Verb:** POST
+
+- **Required data:**  species_name, designation, home_planet, lifespan
+
+- **Expected response data:**  Expected '200 OK' response with return of all data from the registered species 
+
+- **Authentication methods:** Matching Jedi master JWT token
+
+- **Description:** Allows a Jedi master to register a new species in the database
+
+![Register species](/docs/endpoints/registerspecies.JPG)
+
+---
+
+### **15. /species/<species_name>**
+
+- **HTTP Request Verb:** PUT, PATCH
+
+- **Required data:**  home_planet, designation
+
+- **Expected response data:**  Expected '200 OK' response with return of all data from the updated species
+
+- **Authentication methods:** Matching Jedi master JWT token
+
+- **Description:** Allows a Jedi master to update a species home_planet and designation
+
+![Update species](/docs/endpoints/updatespecies.JPG)
+
+---
+
+### **16. /species/<species_name>**
+
+- **HTTP Request Verb:** DELETE
+
+- **Required data:**  None
+
+- **Expected response data:**  Expected '200 OK' response with empty tuple
+
+- **Authentication methods:** Matching Jedi councilmember JWT token
+
+- **Description:** Allows a Jedi councilmember to delete a species from the database
+
+![Delete species](/docs/endpoints/deletespecies.JPG)
+
 
 
 

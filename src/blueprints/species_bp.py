@@ -57,12 +57,12 @@ def update_species(species_name):
     if species:
         master(species.jedi_id)
         species.home_planet = species_info.get('home_planet', species.home_planet)
+        species.designation = species_info.get('designation', species.designation)
         db.session.commit()
         return SpeciesSchema().dump(species)
     else:
         return {'error': 'Species not found'}, 404
     
-
 # Delete a species from the database
 @species_bp.route('/<string:species_name>', methods=['DELETE'])
 @jwt_required()
