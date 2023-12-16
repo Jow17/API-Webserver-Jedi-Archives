@@ -15,16 +15,17 @@ class Planet(db.Model):
     population = db.Column(db.String)
     allegiance = db.Column(db.String, nullable=False)
     description = db.Column(db.Text)
-    jedi_assigned = db.Column(db.String)
 
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
+    jedi = db.relationship('Jedi', back_populates='planets') 
 
 # Converts data types to JSON format
 class PlanetSchema(ma.Schema):
+    jedi = fields.Nested('JediSchema', only=['jedi_name'])
     allegiance= fields.String(required=True, validate=OneOf(VALID_ALLEGIANCES))
 
     class Meta:
-        fields = ('id','planet_name', 'sector', 'population', 'allegiance', 'description', 'jedi_id', 'jedi_assigned') 
+        fields = ('id','planet_name', 'sector', 'population', 'allegiance', 'description','jedi',) 
     
 
 

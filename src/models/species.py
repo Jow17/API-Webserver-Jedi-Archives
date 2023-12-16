@@ -10,17 +10,17 @@ class Species(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    species_name = db.Column(db.String, nullable=False, unique=True)
+    species_name = db.Column(db.String, nullable=False)
     designation = db.Column(db.String, nullable=False)
-    home_planet = db.Column(db.String)
     lifespan = db.Column(db.String)
 
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
+    jedi = db.relationship('Jedi', back_populates='species')
 
 # Converts datatypes into JSON  
 class SpeciesSchema(ma.Schema):
     designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
 
     class Meta:
-        fields = ('id', 'species_name', 'designation', 'home_planet', 'lifespan', 'jedi', 'jedi_id')
+        fields = ('id', 'species_name', 'designation', 'lifespan', 'jedi_id',)
 

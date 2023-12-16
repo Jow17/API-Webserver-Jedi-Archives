@@ -22,12 +22,10 @@ def register():
                 "utf8"
             ),
             jedi_name=jedi_info.get("jedi_name", ""),
-            rank=jedi_info.get("rank", ""),
-            species=jedi_info.get("species", ""),
-            master=jedi_info.get("master", ""),
-            apprentice=jedi_info.get("apprentice", ""),
+            rank_title=jedi_info.get("rank_title", ""),
+            species_name=jedi_info.get("species", ""),
             current_location=jedi_info.get("current_location", ""),
-            status=jedi_info.get("status", ""),
+            status_title=jedi_info.get("status_title", ""),
         )
 
         db.session.add(jedi)
@@ -62,9 +60,9 @@ def update_jedi(jedi_name):
     if jedi:
         master, councilmember(jedi.jedi_name)
         jedi.current_location = jedi_info.get('current_location', jedi.current_location)
-        jedi.status = jedi_info.get('status', jedi.status)
+        jedi.status_title = jedi_info.get('status_title', jedi.status)
         db.session.commit()
-        return JediSchema(only=['jedi_name', 'current_location', 'status']).dump(jedi)
+        return JediSchema(only=['jedi_name', 'current_location', 'status_title']).dump(jedi)
     else:
         return {'error': 'Jedi not found'}, 404
 
@@ -77,9 +75,9 @@ def update_jedi_rank(jedi_name):
     jedi = db.session.scalar(stmt)
     if jedi:
         councilmember(jedi.jedi_name)
-        jedi.rank = jedi_info.get('rank', jedi.rank)
+        jedi.rank_title = jedi_info.get('rank_title', jedi.rank_title)
         db.session.commit()
-        return JediSchema(only=['jedi_name', 'rank']).dump(jedi)
+        return JediSchema(only=['jedi_name', 'rank_title']).dump(jedi)
     else:
         return {'error': 'Jedi not found'}, 404
 

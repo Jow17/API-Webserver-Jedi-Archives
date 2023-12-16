@@ -39,7 +39,6 @@ def register_planet():
             population = planet_info.get('population', ''),
             allegiance = planet_info.get('allegiance', ''),
             description = planet_info["description"],
-            jedi_assigned = planet_info.get('jedi_assigned', ''),
             jedi_id=get_jwt_identity()
         )
         db.session.add(planet)
