@@ -19,7 +19,7 @@ class Planet(db.Model):
 
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
 
-
+# Converts data types to JSON format
 class PlanetSchema(ma.Schema):
     allegiance= fields.String(required=True, validate=OneOf(VALID_ALLEGIANCES))
 

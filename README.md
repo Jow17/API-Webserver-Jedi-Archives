@@ -1,4 +1,4 @@
-# T2A3 - API Webserver Project
+# T2A2 - API Webserver Project
 ## Jonathan Ow 
 
 [Github Repository](https://github.com/Jow17/API-Webserver-Jedi-Archives)
@@ -349,16 +349,106 @@ Visually, ORMs are easier to read and code as it uses classes that define attrib
 
 ![Delete species](/docs/endpoints/deletespecies.JPG)
 
-
-
+---
 
 ### **R6 - An ERD for your app**
 
 ![Archives ERD](docs/Jedi_Archives_ERD.JPG)
 
+---
+
 ### **R7 - Detail any third party services that your app will use**
 
+### Flask
+Flask is a python framework designed for creating web applications. It provides the ability to create and manage URL routes and handle HTTP requests, among other functionalities.
+
+### SQL Alchemy
+SQL Alchemy is a python library that serves as an object relational mapper (ORM). It enables the replacement of raw SQL queries with python code.
+
+### PostgreSQL
+PostgreSQL is a robust and freely available database management system with an open-source nature. It is a relational database system that supports querying of data stored via the SQL language
+
+### Marshmallow
+Marshmallow is a python library utilised for converting data formats such as JSON into python data types.
+
+### Psycopg2
+Psycopg2 is a python adapter that facilitates the connection and manipulation of PostgreSQL databases through python programs.
+
+### Bcrypt
+Bcrypt is a password hashing function employed within APIs to securely encrypt and store user passwords.
+
+### JWT Manager
+JWT Manager is a python library utilised to manage JSON web tokens, including creation, storage, validation, and overall management.
+
+---
+
 ### **R8 - Describe your projects models in terms of the relationships they have with each other**
+
+All models in the application have been stored in a dedicated models folder inside the src directory. SQLalchemy was used to create the class structures 
+
+### Jedi Model: ###
+
+```py
+VALID_STATUSES = ('Alive', 'Deceased', 'Unknown')
+VALID_RANKS = ('Councilmember', 'Master', 'Knight')
+
+# Creates table structure with column names and data types 
+class Jedi(db.Model):
+    __tablename__ = 'jedi'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    username = db.Column(db.String, nullable=False, unique=True)
+    jedi_name = db.Column(db.String, nullable=False, unique=True)
+    access_code = db.Column(db.String, nullable=False)
+    rank = db.Column(db.String, nullable=False)
+    species = db.Column(db.String, nullable=False)
+    master = db.Column(db.String)
+    apprentice = db.Column(db.String)
+    current_location = db.Column(db.String, nullable=False)
+    status = db.Column(db.String, nullable=False)
+
+# Converts datatypes into JSON  
+class JediSchema(ma.Schema):
+    username = fields.String(validate=Length(min=6, error = 'Username must be at least 6 characters'))
+    access_code = fields.String(validate=Length(min=8, error = 'Access code must be as least 8 characers long'))
+    status = fields.String(validate=OneOf(VALID_STATUSES))
+    rank = fields.String(validate=OneOf(VALID_RANKS))
+    
+    class Meta:
+        fields = ("id", "username", "jedi_name", "access_code", "species", "rank", "master", "apprentice","current_location", "status")
+```
+
+The Jedi model is the main part of the application as it stores the information required about each individual Jedi. Jedi do not have relationships with the other tables, however the primary key is referenced in the species and planets tables and shows which Jedi was the one who registered them. 
+
+### The Species Model 
+
+```py
+VALID_DESIGNATIONS = ('Sentient' , 'Non-sentient', 'Semi-sentient')
+
+# Creates table structure with column names and data types 
+class Species(db.Model):
+    __tablename__ = 'species'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    species_name = db.Column(db.String, nullable=False, unique=True)
+    designation = db.Column(db.String, nullable=False)
+    home_planet = db.Column(db.String)
+    lifespan = db.Column(db.String)
+
+    jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
+
+# Converts datatypes into JSON  
+class SpeciesSchema(ma.Schema):
+    designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
+
+    class Meta:
+        fields = ('id', 'species_name', 'designation', 'home_planet', 'lifespan', 'jedi', 'jedi_id')
+```
+
+The species model is linked to the Jedi model via a foreign key. This is to track which Jedi registered the planet in the first place. 
+
 
 ### **R9 - Discuss the database relations to be implemented in your application**
 

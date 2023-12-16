@@ -20,6 +20,7 @@ class Jedi(db.Model):
     apprentice = db.Column(db.String)
     current_location = db.Column(db.String, nullable=False)
     status = db.Column(db.String, nullable=False)
+    
 
 # Converts datatypes into JSON  
 class JediSchema(ma.Schema):
