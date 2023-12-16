@@ -11,10 +11,7 @@ planets_bp = Blueprint('planets', __name__, url_prefix='/planets')
 @planets_bp.route("/")
 @jwt_required()
 def all_planets():
-    # select * from planets;
-    stmt = db.select(
-        Planet
-    )  # .where(db.or_(Card.status != 'Done', Card.id > 2)).order_by(Card.title.desc())
+    stmt = db.select(Planet)  
     planets = db.session.scalars(stmt).all()
     return PlanetSchema(many=True).dump(planets)
 
@@ -37,12 +34,12 @@ def register_planet():
     try:
         planet_info = PlanetSchema(exclude=['id']).load(request.json)
         planet = Planet(
-            planet_name=planet_info['planet_name'],
-            sector=planet_info.get('sector', ''),
-            population=planet_info.get('population', ''),
-            allegiance=planet_info.get('allegiance', ''),
-            description=planet_info["description"],
-            jedi_assigned=planet_info.get('jedi_assigned', ''),  # Add a comma here
+            planet_name = planet_info['planet_name'],
+            sector = planet_info.get('sector', ''),
+            population = planet_info.get('population', ''),
+            allegiance = planet_info.get('allegiance', ''),
+            description = planet_info["description"],
+            jedi_assigned = planet_info.get('jedi_assigned', ''),
             jedi_id=get_jwt_identity()
         )
         db.session.add(planet)

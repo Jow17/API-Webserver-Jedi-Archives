@@ -2,9 +2,9 @@ from setup import db, ma
 from marshmallow import fields 
 from marshmallow.validate import OneOf
 
-VALID_DESIGNATIONS = ('sentient' , 'non-sentient', 'semi-sentient')
+VALID_DESIGNATIONS = ('Sentient' , 'Non-sentient', 'Semi-sentient')
 
-
+# Creates table structure with column names and data types 
 class Species(db.Model):
     __tablename__ = 'species'
 
@@ -17,8 +17,8 @@ class Species(db.Model):
 
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
 
+# Converts datatypes into JSON  
 class SpeciesSchema(ma.Schema):
-    jedi = fields.Nested('JediSchema', only=['name'])
     designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
 
     class Meta:

@@ -13,11 +13,9 @@ jedi_bp = Blueprint('jedi', __name__, url_prefix='/jedi')
 @jedi_bp.route("/register", methods=["POST"])
 @jwt_required()
 def register():
-    councilmember() # Councilmember only
+    councilmember() 
     try:
-        # Parse incoming POST body through the schema
         jedi_info = JediSchema(exclude=["id"]).load(request.json)
-        # Create a new user with the parsed data
         jedi = Jedi(
             username=jedi_info["username"],
             access_code=bcrypt.generate_password_hash(jedi_info["access_code"]).decode(
@@ -25,18 +23,16 @@ def register():
             ),
             name=jedi_info.get("name", ""),
             rank=jedi_info.get("rank", ""),
-            species=jedi_info.get("species", ""),
+            species_name=jedi_info.get("species", ""),
             master=jedi_info.get("master", ""),
             apprentice=jedi_info.get("apprentice", ""),
             current_location=jedi_info.get("current_location", ""),
             status=jedi_info.get("status", ""),
         )
 
-        # Add and commit the new user to the database
         db.session.add(jedi)
         db.session.commit()
 
-        # Return the new user
         return JediSchema(exclude=["access_code"]).dump(jedi), 201
     except IntegrityError:
         return {"error": "username already in use!"}, 409
@@ -44,29 +40,24 @@ def register():
 # Login a Jedi
 @jedi_bp.route("/login", methods=["POST"])
 def login():
-    # 1. Parse incoming POST body through the schema
     jedi_info = JediSchema(exclude=["id"]).load(request.json)
-    # 2. Select jedi with username that matches the one in the POST body
     stmt = db.select(Jedi).where(Jedi.username == jedi_info["username"])
     jedi = db.session.scalar(stmt)
-    # 3. Check password hash
     if jedi and bcrypt.check_password_hash(jedi.access_code, jedi_info["access_code"]):
-        # 4. Create a JWT token
         token = create_access_token(identity=jedi.id, expires_delta=timedelta(hours=2))
-        # 5. Return the token
         return {
             "token": token,
             "jedi": JediSchema(exclude=["id", "access_code",]).dump(jedi),
         }
     else:
         return {"error": "Invalid username or access codes!"}, 401
-    
-#Update Jedi status and current location
+
+# Update a Jedi's current location and status
 @jedi_bp.route('/<string:name>/update', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_jedi(name):
     jedi_info = JediSchema(exclude=['id']).load(request.json)
-    stmt = db.select(Jedi).filter_by(name=name) # .where(Jedi.id == id)
+    stmt = db.select(Jedi).filter_by(name=name) 
     jedi = db.session.scalar(stmt)
     if jedi:
         master, councilmember(jedi.name)
@@ -77,12 +68,12 @@ def update_jedi(name):
     else:
         return {'error': 'Jedi not found'}, 404
 
-# Update Jedi rank
+# Update a Jedi's rank
 @jedi_bp.route('/<string:name>/update/rank', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_jedi_rank(name):
     jedi_info = JediSchema(exclude=['id']).load(request.json)
-    stmt = db.select(Jedi).filter_by(name=name) # .where(Jedi.id == id)
+    stmt = db.select(Jedi).filter_by(name=name) 
     jedi = db.session.scalar(stmt)
     if jedi:
         councilmember(jedi.name)
@@ -108,7 +99,6 @@ def one_jedi(name):
 @jwt_required()
 def all_jedi():
     master, councilmember()
-    # select * from Jedi;
     stmt = db.select(Jedi)
     jedi = db.session.scalars(stmt).all()
     return JediSchema(many=True, exclude=['access_code']).dump(jedi)

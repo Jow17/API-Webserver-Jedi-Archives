@@ -1,4 +1,4 @@
-from flask import Blueprint, request, abort
+from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from setup import db
 from models.species import SpeciesSchema, Species

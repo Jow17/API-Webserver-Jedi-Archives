@@ -4,6 +4,7 @@ from marshmallow.validate import OneOf
 
 VALID_ALLEGIANCES = ('Republic', 'Seperatist', 'Independent' )
 
+# Creates table structure with column names and data types 
 class Planet(db.Model):
     __tablename__ = 'planets'
 
@@ -20,7 +21,6 @@ class Planet(db.Model):
 
 
 class PlanetSchema(ma.Schema):
-    jedi = fields.Nested('JediSchema', exclude=['access_code'])
     allegiance= fields.String(required=True, validate=OneOf(VALID_ALLEGIANCES))
 
     class Meta:
