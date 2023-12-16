@@ -92,7 +92,104 @@ ORM's are extremely useful as they enable developers to use the progamming langu
 
 Visually, ORMs are easier to read and code as it uses classes that define attributes and business related models. These are called models which are mapped to relational database tables and enables developers to work directly with objects.
 
+---
+
 ### **R5 - Document all endpoints for your API**
+
+### **1. /jedi/register**
+
+- **HTTP Request Verb:** POST 
+
+- **Required data:** username, jedi_name, access_code, rank, species, master, apprentice, current_location, status 
+
+- **Expected response data:**  Expected '201 CREATED' response with return of data excluding access code
+
+- **Authentication methods:** A JWT token matching that of a councilmember is needed to authenticate registration
+
+- **Description:** Allows a councilmember to register Jedi to the database 
+
+![jedi register](/docs/endpoints/jediregister.JPG)
+---
+
+### **2. /jedi/login**
+
+- **HTTP Request Verb:** POST 
+
+- **Required data:** username, password  
+
+- **Expected response data:**  Expected '201 CREATED' response with return of data excluding access code
+
+- **Authentication methods:** username, password 
+
+- **Description:** Allows a Jedi to login provided that username and access code are matching in the database. A JWT token is also generated which required for authorization and use of the archives 
+
+![jedi login](/docs/endpoints/jedilogin.JPG)
+
+---
+
+### **3. /jedi**
+
+- **HTTP Request Verb:** GET
+
+- **Required data:** None
+
+- **Expected response data:**  Expected '200 OK' response with return of all Jedi in the database excluding access code
+
+- **Authentication methods:** Matching councilmember JWT token
+
+- **Description:** Allows a Jedi councilmember to view all Jedi in the database
+
+![get all jedi](/docs/endpoints/jedi.JPG)
+
+---
+
+### **4. /jedi/<jedi_name>**
+
+- **HTTP Request Verb:** GET
+
+- **Required data:** Name of Jedi in the url 
+
+- **Expected response data:**  Expected '200 OK' response with return of all data of Jedi exclusing access code
+
+- **Authentication methods:** Matching councilmember or master JWT token
+
+- **Description:** Allows a Jedi councilmember or master to view a single Jedi in the database
+
+![get one jedi](/docs/endpoints/getonejedi.JPG)
+
+---
+
+### **5. /jedi/<jedi_name>/update/rank**
+
+- **HTTP Request Verb:** PUT, PATCH
+
+- **Required data:** Name of Jedi in the url and new rank in the body
+
+- **Expected response data:**  Expected '200 OK' response with return of Jedi's name and new rank
+
+- **Authentication methods:** Matching councilmember JWT token
+
+- **Description:** Allows a Jedi councilmember to update the rank of a Jedi
+
+![jedi rank](/docs/endpoints/Updaterank.JPG)
+
+---
+
+### **6. /jedi/<jedi_name>/update**
+
+- **HTTP Request Verb:** PUT, PATCH
+
+- **Required data:** Name of Jedi in the url, current_location and status
+
+- **Expected response data:**  Expected '200 OK' response with return of Jedi's name, new location and status
+
+- **Authentication methods:** Matching master or councilmember JWT token
+
+- **Description:** Allows a Jedi councilmember to update the location and status of a Jedi
+
+![jedi update](/docs/endpoints/updatejedi.JPG)
+
+
 
 ### **R6 - An ERD for your app**
 

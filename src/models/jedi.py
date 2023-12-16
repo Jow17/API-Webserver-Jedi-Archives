@@ -12,7 +12,7 @@ class Jedi(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     username = db.Column(db.String, nullable=False, unique=True)
-    jedi_name = db.Column(db.String, nullable=False)
+    jedi_name = db.Column(db.String, nullable=False, unique=True)
     access_code = db.Column(db.String, nullable=False)
     rank = db.Column(db.String, nullable=False)
     species = db.Column(db.String, nullable=False)
