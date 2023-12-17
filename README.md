@@ -27,8 +27,20 @@ sudo service postgresql start
 ```
 Create database:
 ```sh
-create database jedi-archives
+create database jedi_archives
 ```
+Connect to databse
+```sh
+\c jedi_archives
+```
+
+Create user with a password, then grant all privileges e.g :
+```sh
+CREATE USER archives_admin WITH PASSWORD 'maytheforcebewithyou';
+
+GRANT ALL PRIVILEGES ON DATABASE jedi_archives TO archives_admin;
+```
+
 #### **Open second WSL command line and run the following commands:**
 
 Create virtual environment:
@@ -39,7 +51,19 @@ If virtual environment is not automatically activated run:
 ```sh
 source .venv/bin/activate
 ```
+
+In `.flaskenv` input the following fields
+
+```py
+# Database connection string
+DB_URI="postgresql+psycopg2://archives_admin:maytheforcebewithyou@127.0.0.1:5432/jedi_archives"
+
+# JWT secret key
+JWT_KEY="This is the secret key"
+```
+
 Finally, run the following cli commands to set up and run Flask application:
+
 ```sh
 pip install -r requirements.txt
 flask run
@@ -562,3 +586,4 @@ Using the #standups channel in the Coderacademy discord was also helpful as it e
 ![Trello 4](docs/Trello/trello4.JPG)
 ![Trello 5](docs/Trello/trello5.JPG)
 
+---
