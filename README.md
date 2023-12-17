@@ -542,7 +542,24 @@ Planets contain the foreign key jedi_id to ensure that jedi who register new pla
 
 Species contain the foreign key jedi_id to ensure that jedi who register new species can be tracked. Jedi masters can register as many new species as they want however each species will only have the name of the Jedi who registered and this is returned as a JSON list. Only a Jedi with the master rank can create and update a species but only a councilmember can delete a species. 
 
+---
 
 ### **R10 - Describe the way tasks are allocated and tracked in your project**
 
-Trello was the main application for tracking my progress 
+Trello was the main application for tracking my progress. Each model and blueprint has its own card and individual checklist which contains a list of all the functions in each files. For purposes of organisation and seperation of concerns, I have categorised them into 4 groups.
+
+- To do: Files or tasks that have yet to be created 
+- Doing: Tasks and files that are in the development phase
+- Testing: files that have been completed but need testing, in this case routes that need to be tested will then be placed here
+- Complete: Files that have been successfully tested and completed are finally moved to this category
+
+Using the #standups channel in the Coderacademy discord was also helpful as it ensures accountability and enables other students to see the progress that each other makes and be encouraged, especially when they encounter similar issues with their code. 
+
+### Screenshots ###
+
+![Trello 1](docs/Trello/trello1.JPG)
+![Trello 2](docs/Trello/trello2.JPG)
+![Trello 3](docs/Trello/trello3.jpg)
+![Trello 4](docs/Trello/trello4.JPG)
+![Trello 5](docs/Trello/trello5.JPG)
+
