@@ -22,16 +22,16 @@ def register():
                 "utf8"
             ),
             jedi_name=jedi_info.get("jedi_name", ""),
-            rank_title=jedi_info.get("rank_title", ""),
-            species_name=jedi_info.get("species", ""),
             current_location=jedi_info.get("current_location", ""),
-            status_title=jedi_info.get("status_title", ""),
+            species_name=jedi_info.get("species_name", ""),
+            rank_title=jedi_info["rank_title"],
+            status_title=jedi_info["status_title"],
         )
 
         db.session.add(jedi)
         db.session.commit()
 
-        return JediSchema(exclude=["access_code"]).dump(jedi), 201
+        return JediSchema(exclude=["access_code", ]).dump(jedi), 201
     except IntegrityError:
         return {"error": "username already in use!"}, 409
 
@@ -42,7 +42,7 @@ def login():
     stmt = db.select(Jedi).where(Jedi.username == jedi_info["username"])
     jedi = db.session.scalar(stmt)
     if jedi and bcrypt.check_password_hash(jedi.access_code, jedi_info["access_code"]):
-        token = create_access_token(identity=jedi.id, expires_delta=timedelta(hours=2))
+        token = create_access_token(identity=jedi.id, expires_delta=timedelta(minutes=10))
         return {
             "token": token,
             "jedi": JediSchema(exclude=["id", "access_code",]).dump(jedi),
@@ -58,9 +58,9 @@ def update_jedi(jedi_name):
     stmt = db.select(Jedi).filter_by(jedi_name=jedi_name) 
     jedi = db.session.scalar(stmt)
     if jedi:
-        master, councilmember(jedi.jedi_name)
+        master, councilmember()
         jedi.current_location = jedi_info.get('current_location', jedi.current_location)
-        jedi.status_title = jedi_info.get('status_title', jedi.status)
+        jedi.status_title = jedi_info.get('status_title', jedi.statuses)
         db.session.commit()
         return JediSchema(only=['jedi_name', 'current_location', 'status_title']).dump(jedi)
     else:
@@ -74,7 +74,7 @@ def update_jedi_rank(jedi_name):
     stmt = db.select(Jedi).filter_by(jedi_name=jedi_name) 
     jedi = db.session.scalar(stmt)
     if jedi:
-        councilmember(jedi.jedi_name)
+        councilmember()
         jedi.rank_title = jedi_info.get('rank_title', jedi.rank_title)
         db.session.commit()
         return JediSchema(only=['jedi_name', 'rank_title']).dump(jedi)
@@ -82,7 +82,7 @@ def update_jedi_rank(jedi_name):
         return {'error': 'Jedi not found'}, 404
 
 # Get one Jedi
-@jedi_bp.route('/<string:jedi_name>')
+@jedi_bp.route('/<string:jedi_name>', methods = ['GET'])
 @jwt_required()
 def one_jedi(jedi_name):
     stmt = db.select(Jedi).filter_by(jedi_name=jedi_name)

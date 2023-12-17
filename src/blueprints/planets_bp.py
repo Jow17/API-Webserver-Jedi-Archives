@@ -55,9 +55,10 @@ def update_planet(planet_name):
     stmt = db.select(Planet).filter_by(planet_name=planet_name)
     planet = db.session.scalar(stmt)
     if planet:
-        master(planet.jedi_id)
+        master()
         planet.allegiance = planet_info.get('allegiance', planet.allegiance)
-        planet.jedi_assigned = planet_info.get('jedi_assigned', planet.jedi_assigned)
+        planet.population = planet_info.get('population', planet.population)
+        planet.description = planet_info.get('description', planet.description)
         db.session.commit()
         return PlanetSchema().dump(planet)
     else:

@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 species_bp = Blueprint('species',__name__, url_prefix='/species')
 
 # Get all species 
-@species_bp.route("/")
+@species_bp.route("/", methods=['GET'])
 @jwt_required()
 def all_species():
     # select * from species;
@@ -17,7 +17,7 @@ def all_species():
     return SpeciesSchema(many=True).dump(species)
 
 # Get one species
-@species_bp.route('/<string:species_name>')
+@species_bp.route('/<string:species_name>', methods=['GET'])
 @jwt_required()
 def one_species(species_name):
     stmt = db.select(Species).filter_by(species_name=species_name)
@@ -37,7 +37,6 @@ def register_species():
         species = Species(
             species_name = species_info['species_name'],
             designation = species_info.get('designation', ''),
-            home_planet = species_info.get('home_planet', ''),
             lifespan = species_info.get('lifespan', ''),
             jedi_id = get_jwt_identity()
         )
@@ -55,8 +54,7 @@ def update_species(species_name):
     stmt = db.select(Species).filter_by(species_name=species_name)
     species = db.session.scalar(stmt)
     if species:
-        master(species.jedi_id)
-        species.home_planet = species_info.get('home_planet', species.home_planet)
+        master()
         species.designation = species_info.get('designation', species.designation)
         db.session.commit()
         return SpeciesSchema().dump(species)

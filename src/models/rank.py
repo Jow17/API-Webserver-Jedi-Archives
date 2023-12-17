@@ -9,6 +9,7 @@ class Rank(db.Model):
     jedi = db.relationship('Jedi', back_populates= 'rank')
 
 
+# JSON (de)serialization with Marshmallow
 class RankSchema(ma.Schema):
 
     class Meta:

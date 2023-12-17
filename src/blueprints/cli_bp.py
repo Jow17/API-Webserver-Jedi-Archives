@@ -32,6 +32,7 @@ def db_seed():
 
     db.session.add_all(statuses)
     db.session.commit()
+
     ranks = [
         Rank(
             title = "Councilmember",
@@ -103,7 +104,6 @@ def db_seed():
             sector="Abrion",
             population="1 billion",
             allegiance="Independent",
-            description="Almost entirely covered by sea, the Kaminoans have built a state of the art cloning facility",
             jedi_id = jedi[1].id,
         ),
     ]

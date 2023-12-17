@@ -389,65 +389,39 @@ All models in the application have been stored in a dedicated models folder insi
 ### Jedi Model: ###
 
 ```py
-VALID_STATUSES = ('Alive', 'Deceased', 'Unknown')
-VALID_RANKS = ('Councilmember', 'Master', 'Knight')
-
-# Creates table structure with column names and data types 
 class Jedi(db.Model):
     __tablename__ = 'jedi'
 
     id = db.Column(db.Integer, primary_key=True)
 
     username = db.Column(db.String, nullable=False, unique=True)
-    jedi_name = db.Column(db.String, nullable=False, unique=True)
     access_code = db.Column(db.String, nullable=False)
-    rank = db.Column(db.String, nullable=False)
-    species = db.Column(db.String, nullable=False)
-    master = db.Column(db.String)
-    apprentice = db.Column(db.String)
-    current_location = db.Column(db.String, nullable=False)
-    status = db.Column(db.String, nullable=False)
+    jedi_name = db.Column(db.String, nullable=False, unique=True)
+    current_location = db.Column(db.Text, nullable=False)
+    species_name = db.Column(db.String, nullable=False)
+    
+    rank_title = db.Column(db.String, db.ForeignKey('ranks.title'), nullable=False)
+    rank = db.relationship('Rank', back_populates='jedi')
 
-# Converts datatypes into JSON  
+    status_title = db.Column(db.String, db.ForeignKey('statuses.title'), nullable=False)
+    statuses = db.relationship('Status', back_populates='jedi')
+
+    species = db.relationship('Species', back_populates='jedi')
+
+    planets = db.relationship('Planet', back_populates='jedi')
+    
+
+# JSON (de)serialization with Marshmallow
 class JediSchema(ma.Schema):
+    rank = fields.Nested('RankSchema')
+    statuses = fields.Nested('StatusSchema')
     username = fields.String(validate=Length(min=6, error = 'Username must be at least 6 characters'))
     access_code = fields.String(validate=Length(min=8, error = 'Access code must be as least 8 characers long'))
-    status = fields.String(validate=OneOf(VALID_STATUSES))
-    rank = fields.String(validate=OneOf(VALID_RANKS))
     
     class Meta:
-        fields = ("id", "username", "jedi_name", "access_code", "species", "rank", "master", "apprentice","current_location", "status")
+        fields = ("id", "username","access_code", "jedi_name", "current_location", "species_name", "rank_title", "status_title",)
 ```
-
-The Jedi model is the main part of the application as it stores the information required about each individual Jedi. Jedi do not have relationships with the other tables, however the primary key is referenced in the species and planets tables and shows which Jedi was the one who registered them. 
-
-### The Species Model 
-
-```py
-VALID_DESIGNATIONS = ('Sentient' , 'Non-sentient', 'Semi-sentient')
-
-# Creates table structure with column names and data types 
-class Species(db.Model):
-    __tablename__ = 'species'
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    species_name = db.Column(db.String, nullable=False, unique=True)
-    designation = db.Column(db.String, nullable=False)
-    home_planet = db.Column(db.String)
-    lifespan = db.Column(db.String)
-
-    jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
-
-# Converts datatypes into JSON  
-class SpeciesSchema(ma.Schema):
-    designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
-
-    class Meta:
-        fields = ('id', 'species_name', 'designation', 'home_planet', 'lifespan', 'jedi', 'jedi_id')
-```
-
-The species model is linked to the Jedi model via a foreign key. This is to track which Jedi registered the planet in the first place. 
+Th Jedi model relates to the Status and Rank models in a one to one relationship. The unique titles of the Rank and Status models is used as a foreign keys. ```db.relationship ``` is set up on both ends of the models which ensures they are both mapped together, the ```back_populates``` argument specifies which column will be linked in the table. The model also relates t
 
 
 ### **R9 - Discuss the database relations to be implemented in your application**
