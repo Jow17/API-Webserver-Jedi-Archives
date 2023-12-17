@@ -522,11 +522,27 @@ The Species model has a one to many relationship with the Jedi model as one Jedi
 
 ---
 
-
-
-
-
-
 ### **R9 - Discuss the database relations to be implemented in your application**
 
+![Archives ERD](docs/Jedi_Archives_ERD.JPG)
+
+- Jedi to Ranks, One to One
+
+A Jedi can only have one of three ranks Councilmember, Master and Knight, which all unique and grant certain priveleges of accessing. This is displayed via the foreign key which links to the rank_title primary key in Ranks. By putting them in a separate tables, this ensures that they remain unique and cannot be reassigned or changed unless the correct route is called by a Jedi with the councilmember rank. Ranks also determine which routes can be used and this is done so in a seperate file called auth.py which has two functions that check whether a Jedi has a certain rank. This ensures that some such as registering new Jedi can only be done by councilmembers whilst others such as registering species and planets can be done by both masters and councilmembers. 
+
+- Jedi to Statuses , One to One 
+
+Likewise a Jedi can only have one of three statuses, Alive, Unknown and Deaceased, which are all unique primary keys from the Status table. This is done to address the original security issue of being able to use access codes and details of deceased or missing Jedi to use the archives. In addition to checking the rank of Jedi, the functions in auth.py will also check the status of the Jedi by comparing it to the JWT token. Whilst a deceased Jedi's access codes can be used to login, they will only able to read, be unable to register or update any records. 
+
+- Jedi to Planets, One to Many 
+
+Planets contain the foreign key jedi_id to ensure that jedi who register new planets can be tracked. Jedi can register as many new planets as they want however each planet will only have the name of the Jedi who registered and this is returned as a JSON list. Only a Jedi with the master rank can create and update a planet but only a councilmember can delete a planet. 
+
+- Jedi to Species, Many to Many 
+
+Species contain the foreign key jedi_id to ensure that jedi who register new species can be tracked. Jedi masters can register as many new species as they want however each species will only have the name of the Jedi who registered and this is returned as a JSON list. Only a Jedi with the master rank can create and update a species but only a councilmember can delete a species. 
+
+
 ### **R10 - Describe the way tasks are allocated and tracked in your project**
+
+Trello was the main application for tracking my progress 

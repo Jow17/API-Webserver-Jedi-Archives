@@ -8,7 +8,7 @@ def councilmember():
     jwt_jedi_id = get_jwt_identity()
     stmt = db.select(Jedi).filter_by(id=jwt_jedi_id)
     jedi = db.session.scalar(stmt)
-    if not (jedi.rank_title == "Councilmember"):
+    if not (jedi.rank_title == "Councilmember" and jedi.status_title == "Alive"):
         abort(401)
 
 # Checks if jedi's rank is master
@@ -16,5 +16,5 @@ def master():
     jwt_jedi_id = get_jwt_identity()
     stmt = db.select(Jedi).filter_by(id=jwt_jedi_id)
     jedi = db.session.scalar(stmt)
-    if not (jedi.rank_title == "Master" or "Councilmember"):
+    if not (jedi.rank_title == "Master" or "Councilmember" and jedi.status_title == "Alive"):
         abort(401)
