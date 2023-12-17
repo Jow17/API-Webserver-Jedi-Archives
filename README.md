@@ -47,12 +47,13 @@ Create virtual environment:
 ```sh
 python3 -m venv .venv
 ```
+
 If virtual environment is not automatically activated run:
 ```sh
 source .venv/bin/activate
 ```
 
-In `.flaskenv` input the following fields
+In `.flaskenv` input the following
 
 ```py
 # Database connection string
