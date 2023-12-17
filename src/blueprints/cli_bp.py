@@ -111,7 +111,6 @@ def db_seed():
     db.session.add_all(planets)
     db.session.commit()
 
-    # Species
     species = [
         Species(
             species_name = "Human",
