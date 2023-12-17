@@ -409,7 +409,6 @@ class Jedi(db.Model):
     species = db.relationship('Species', back_populates='jedi')
 
     planets = db.relationship('Planet', back_populates='jedi')
-    
 
 # JSON (de)serialization with Marshmallow
 class JediSchema(ma.Schema):
@@ -421,7 +420,111 @@ class JediSchema(ma.Schema):
     class Meta:
         fields = ("id", "username","access_code", "jedi_name", "current_location", "species_name", "rank_title", "status_title",)
 ```
-Th Jedi model relates to the Status and Rank models in a one to one relationship. The unique titles of the Rank and Status models is used as a foreign keys. ```db.relationship ``` is set up on both ends of the models which ensures they are both mapped together, the ```back_populates``` argument specifies which column will be linked in the table. The model also relates t
+
+The Jedi model relates to the Status and Rank models in a one to one relationship. The unique titles of the Rank and Status models is used as a foreign keys. ```db.relationship ``` is set up on both ends of the models which ensures they are both mapped together, the ```back_populates``` argument specifies which column will be linked in the table. The rank and statuses tables schemas are nested inside the Jedi Schema. The model also relates to the Species and Planets models and is also mapped by a the ```back_populates```  argument.
+
+### Planets Model: ###
+
+```py
+# Creates table structure with column names and data types 
+class Planet(db.Model):
+    __tablename__ = 'planets'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    planet_name = db.Column(db.String, nullable=False, unique=True)
+    sector = db.Column(db.String, nullable=False)
+    population = db.Column(db.String)
+    allegiance = db.Column(db.String, nullable=False)
+    description = db.Column(db.Text)
+
+    jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
+    jedi = db.relationship('Jedi', back_populates='planets') 
+
+# JSON (de)serialization with Marshmallow
+class PlanetSchema(ma.Schema):
+    jedi = fields.Nested('JediSchema', only=['jedi_name'])
+    allegiance= fields.String(required=True, validate=OneOf(VALID_ALLEGIANCES))
+
+    class Meta:
+        fields = ('id','planet_name', 'sector', 'population', 'allegiance', 'description','jedi',) 
+```
+The Planets model contains the jedi_id foreign key which is the primary key in the Jedi model. It has a one to one relationship with the Jedi model via ```db.relationship``` and is linked using the ```back_populates``` argument. The Jedi schema is also nested in the model's Schema and will be returned as a JSON object when called. 
+
+### Rank Model: ###
+
+```py
+# Creates table structure with column names and data types 
+class Rank(db.Model):
+    __tablename__ = 'ranks'
+
+    title = db.Column(db.String, primary_key=True, unique=True)
+
+    jedi = db.relationship('Jedi', back_populates= 'rank')
+
+
+# JSON (de)serialization with Marshmallow
+class RankSchema(ma.Schema):
+
+    class Meta:
+        fields = ('title',)
+```
+
+The Rank model has a onne to one relationship with the Jedi model as one Jedi can only have one rank. The relationship is established using  `db.relationship` and the `backpopulates` argument ensures that the model's primary key is linked to the Jedi model. RankSchema is used to serialize the model as JSON and will only return the rank title.
+
+### Status Model: ###
+
+```py
+# Creates table structure with column names and data types 
+class Status(db.Model):
+    __tablename__ = 'statuses'
+
+    title = db.Column(db.String, primary_key=True,)
+
+
+    jedi = db.relationship('Jedi', back_populates= 'statuses')
+
+    
+# JSON (de)serialization with Marshmallow
+class StatusSchema(ma.Schema):
+
+    class Meta:
+        fields = ('title',)
+```
+The Status model contains the jedi_id foreign key which is the primary key in the Jedi model. It has a one to one relationship with the Jedi model as Jedi can only have one status and this is done via ```db.relationship``` and is linked using the ```back_populates``` argument. The JediSchema is also nested in the model's Schema and will be returned as a JSON object when called. 
+
+### Species Model: ###
+```py
+VALID_DESIGNATIONS = ('Sentient' , 'Non-sentient', 'Semi-sentient')
+
+# Creates table structure with column names and data types 
+class Species(db.Model):
+    __tablename__ = 'species'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    species_name = db.Column(db.String, nullable=False)
+    designation = db.Column(db.String, nullable=False)
+    lifespan = db.Column(db.String)
+
+    jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
+    jedi = db.relationship('Jedi', back_populates='species')
+
+# JSON (de)serialization with Marshmallow 
+class SpeciesSchema(ma.Schema):
+    jedi = fields.Nested('JediSchema', only=['jedi_name'])
+    designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
+
+    class Meta:
+        fields = ('id', 'species_name', 'designation', 'lifespan', 'jedi_id',)
+```
+The Species model has a one to many relationship with the Jedi model as one Jedi can register many species. The foreign key jedi_id is used and the relationship between the 2 models is established via `db.relationship` and `back_populaes` which ensures the 2 models are linked together. The JediSchema has been nested inside model's Schema to show which Jedi was the one what registed the model.
+
+---
+
+
+
+
 
 
 ### **R9 - Discuss the database relations to be implemented in your application**

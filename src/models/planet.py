@@ -19,7 +19,7 @@ class Planet(db.Model):
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
     jedi = db.relationship('Jedi', back_populates='planets') 
 
-# Converts data types to JSON format
+# JSON (de)serialization with Marshmallow
 class PlanetSchema(ma.Schema):
     jedi = fields.Nested('JediSchema', only=['jedi_name'])
     allegiance= fields.String(required=True, validate=OneOf(VALID_ALLEGIANCES))

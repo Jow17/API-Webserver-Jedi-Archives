@@ -17,10 +17,11 @@ class Species(db.Model):
     jedi_id = db.Column(db.Integer, db.ForeignKey('jedi.id'), nullable=False)
     jedi = db.relationship('Jedi', back_populates='species')
 
-# Converts datatypes into JSON  
+# JSON (de)serialization with Marshmallow 
 class SpeciesSchema(ma.Schema):
+    jedi = fields.Nested('JediSchema', only=['jedi_name'])
     designation = fields.String(validate=OneOf(VALID_DESIGNATIONS))
 
     class Meta:
-        fields = ('id', 'species_name', 'designation', 'lifespan', 'jedi_id',)
+        fields = ('id', 'species_name', 'designation', 'lifespan', 'jedi',)
 

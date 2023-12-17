@@ -10,6 +10,8 @@ class Status(db.Model):
 
     jedi = db.relationship('Jedi', back_populates= 'statuses')
 
+    
+# JSON (de)serialization with Marshmallow
 class StatusSchema(ma.Schema):
 
     class Meta:
